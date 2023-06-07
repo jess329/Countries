@@ -19,7 +19,7 @@ This is a React application that allows users to search for countries and displa
 ## Usage
 
 1. Start the development server: `npm start`
-2. Open the browser and visit `http://localhost:3000` to view the application.
+2. Open the browser and visit `` to view the application.
 3. Enter a country name in the search input field and click the search button.
 4. The application will fetch and display data about the searched country.
 5. To search for another country, enter a new name and click the search button.
