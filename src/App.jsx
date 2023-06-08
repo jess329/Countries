@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Countries from "./Country";
 import Country from "./Country";
+import SortLogic from "./SortLogic";
 
 const url = 'https://country-facts.p.rapidapi.com/all';
 const options = {
@@ -17,6 +18,7 @@ const App = () => {
   const [resetData, setResetData] = useState([])
   const [loading, setLoading] = useState(true) 
   const [error, setError] = useState(false)
+  const [sort, setSort] = useState("alphabet")
 
   useEffect(() => {
     try {
@@ -26,14 +28,30 @@ const App = () => {
         console.log(data);
         setCountriesData(data)
         setResetData(data)
+        setLoading(false)
       }
       fetchCountries()
     } catch (error) {
       console.log(error);
+      setError(true)
     }    
+    
   }, [])
 
-  const searchSubmit = () => {
+  
+  if(loading) return (
+    <div className="message">
+      <h1 >Loading...</h1>
+    </div>
+  ) 
+  if(error) return (
+    <div className="message">
+      <h1>There was an error.</h1>
+    </div>
+  ) 
+  
+  const searchSubmit = (e) => {
+    e.preventDefault()
     const searchInput = document.getElementById('search').value;
     if(!searchInput) {
       setCountriesData(resetData) 
@@ -48,22 +66,19 @@ const App = () => {
   return (
     <body>
       <header>
-        <h1>Countries</h1>
-        <div className="search-input">
-          <label htmlFor="search">Search Country: </label>
-          <input type="text" id="search" name="search"/>
-          <button className="btn" onClick={searchSubmit}>Search</button>
-        </div>
+        <form className="search-input" onSubmit={searchSubmit}>
+          <input type="text" id="search" name="search" placeholder="Search Country"/>
+          <button className="btn search" type="submit">Search</button>
+        </form>
         <div className="sortoptions">
-          <label htmlFor="sort">Sort By:</label>
-          <select name="sort" id="sort">
+          <select name="sort" id="sort" onChange={(e) => setSort(e.target.value)}>
             <option value="alphabet">Alphabet</option>
             <option value="population down">Population down</option>
             <option value="population up">Population up</option>
             <option value="area">Area</option>
           </select>
         </div>
-        
+        <SortLogic sort={sort} allCountries={resetData} setCountries={setCountriesData} />
       </header>
       <main>
           {countriesData.map((country) => {

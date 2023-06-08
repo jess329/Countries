@@ -1,37 +1,79 @@
+:root {
+  --bg-clr: #1B273E;
+  --main-clr1: #243451;
+  --main-clr2: #1A325D;
+  --main-clr3: #1A325D; 
+  --main-clr4: #11192C;
+  --script-clr: #D8DCE5;
+}
+
 html, * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--script-clr);
+  font-family: "Geologica";
+  font-weight: 200;
 }
 body {
   display: grid;
   gap: 1rem;
+  background-color: var(--bg-clr);
+  overflow-x: hidden;
 }
-
-/* Header */
-header {
+.message {
   width: 100%;
   display: grid;
   place-items: center;
+  margin-top: 10rem;
+} 
+
+/* Header */
+header {
+  width: 90%;
+  position: relative;
+  margin: 10px auto;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  place-items: center;
   place-content: center;
   position: relative;
-  top: 3rem;
 }
-.search-input {
-  position: relative;
-  top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: fit-content;
+header > * {
+  width: 100%;
+  border: 2px solid black;
 }
-.btn {
-  margin: 5px;
-  width: fit-content;
+.btn.search{
   padding: 0 10px;
+  width: 80%;
+  display: none;
 } 
+.search-input {
+  display: grid;
+  place-items: center;
+}
 .sortoptions {
-  margin: 1.5rem;
+  width: fit-content;
+  display: grid;
+}
+#search {
+  width: 100%;
+}
+#search, #sort, .btn {
+  box-sizing: border-box;
+  background-color: var(--main-clr4);
+  border: none;
+  height: 40px;
+}
+.sortedby {
+  position: absolute;
+  border: none;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 12rem;
 }
 
 
@@ -48,10 +90,13 @@ main {
 .country {
   width: 100%;
   padding: 10px;
-  border: 1px solid black;
+  background-color: var(--main-clr4);
 }
 .country img {
   width: 100px;
+}
+.info > * {
+  margin-bottom: 5px;
 }
 
 /* Footer */
@@ -60,19 +105,30 @@ footer {
   height: 5rem;
 }
 
-@media screen and (min-width: 400px) {
-  .search-input {
-    flex-direction: row;
+@media screen and (min-width: 425px) {
+  header {
+    grid-template-columns: 1.5fr 0.5fr;
   }
 
   main {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (min-width: 1000px) {
 
+  .sortoptions {
+    width: 90%;
+  }
+
   main {
     grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+@media screen and (min-width: 1400px) {
+
+  main {
+    grid-template-columns: repeat(4, 1fr); 
   }
 }
