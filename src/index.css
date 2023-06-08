@@ -109,6 +109,9 @@ footer {
   header {
     grid-template-columns: 1.5fr 0.5fr;
   }
+  .sortedby {
+    margin-top: 10rem;
+  }
 
   main {
     grid-template-columns: repeat(2, 1fr);
